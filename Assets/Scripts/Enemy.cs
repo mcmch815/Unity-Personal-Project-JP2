@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     private Quaternion enemyToPlayerRotation;
    
     private PlayerController playerControllerScript;
+   
   
 
     // Start is called before the first frame update
@@ -20,6 +21,7 @@ public class Enemy : MonoBehaviour
     {
         enemyRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
+        
        
        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
        InvokeRepeating("FireProjectile", startDelay, enemyFiringInternal);
@@ -27,11 +29,12 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+   /* void Update()
     {
         //enemy only acts if player exists
         if( GameObject.Find("Player") != null)
         {
+            Debug.Log("Player found");
         // Set enemy direction towards player goal and move there
         Vector3 lookDirection = (player.transform.position - transform.position).normalized;
         enemyRb.AddForce(lookDirection * speed * Time.deltaTime);
@@ -39,6 +42,20 @@ public class Enemy : MonoBehaviour
         Vector3 direction = (player.transform.position - transform.position);
      
         enemyToPlayerRotation.SetLookRotation(direction, Vector3.forward);
+        }*/
+
+        void Update()
+    {
+        //enemy only acts if player exists
+        if( GameObject.Find("Player") != null)
+        {
+            Debug.Log("Player found");
+             Vector3 direction = (player.transform.position - transform.position);
+            var step = speed * Time.deltaTime;
+            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, direction, speed * Time.deltaTime, 0.0f));
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
+
+     
         }
  
     //destroy if enemy falls off
