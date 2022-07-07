@@ -12,11 +12,14 @@ public class PlayerController : MonoBehaviour
     
     public bool gameOver = false;
 
+    private GameObject collectable;
+
 
     // Start is called before the first frame update
     void Start()
     {
      playerRb = GetComponent<Rigidbody>();   
+    
         
     }
 
@@ -34,6 +37,21 @@ public class PlayerController : MonoBehaviour
             gameOver = true;
             Destroy(gameObject);
         }
+
+          if( GameObject.FindGameObjectsWithTag("Collectable") != null)
+        {
+
+            collectable = GameObject.FindGameObjectWithTag("Collectable");
+            Debug.Log("Collectable found");
+             Vector3 direction = (collectable.transform.position - transform.position);
+            var step = 100* Time.deltaTime;
+            //make player look at collectable
+            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, direction, step, 0.0f));
+           
+             
+             
+
+        }
     }
 
     //Move player method
@@ -44,6 +62,8 @@ public class PlayerController : MonoBehaviour
 
         playerRb.AddForce(Vector3.forward * speed * verticalInput);
         playerRb.AddForce(Vector3.right * speed * horizontalInput);
+
+       
 
     }
 

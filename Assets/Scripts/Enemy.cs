@@ -13,6 +13,14 @@ public class Enemy : MonoBehaviour
     private Quaternion enemyToPlayerRotation;
    
     private PlayerController playerControllerScript;
+
+
+
+   
+    
+
+    
+
    
   
 
@@ -21,41 +29,37 @@ public class Enemy : MonoBehaviour
     {
         enemyRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
-        
        
+        
+       //enemyAnim.SetBool("Walk Forward", true);
+      
        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
-       InvokeRepeating("FireProjectile", startDelay, enemyFiringInternal);
-
+       //InvokeRepeating("FireProjectile", startDelay, enemyFiringInternal);
+      
     }
 
-    // Update is called once per frame
-   /* void Update()
-    {
-        //enemy only acts if player exists
-        if( GameObject.Find("Player") != null)
-        {
-            Debug.Log("Player found");
-        // Set enemy direction towards player goal and move there
-        Vector3 lookDirection = (player.transform.position - transform.position).normalized;
-        enemyRb.AddForce(lookDirection * speed * Time.deltaTime);
+   
+ 
 
-        Vector3 direction = (player.transform.position - transform.position);
-     
-        enemyToPlayerRotation.SetLookRotation(direction, Vector3.forward);
-        }*/
 
         void Update()
     {
+        
+            
         //enemy only acts if player exists
         if( GameObject.Find("Player") != null)
         {
             Debug.Log("Player found");
              Vector3 direction = (player.transform.position - transform.position);
             var step = speed * Time.deltaTime;
-            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, direction, speed * Time.deltaTime, 0.0f));
+            //make enemy look at player
+            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, direction, step, 0.0f));
+            //move enemy towards player
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
+             
+             FireProjectile();
 
-     
+
         }
  
     //destroy if enemy falls off
@@ -70,8 +74,12 @@ public class Enemy : MonoBehaviour
 
     void FireProjectile(){
         //spwans a projectile
-        Instantiate(enemyProjectilePrefab, transform.position, enemyToPlayerRotation);
+        enemyFiringInternal -= Time.deltaTime;
 
+        if(enemyFiringInternal <=0){
+        Instantiate(enemyProjectilePrefab, transform.position, enemyToPlayerRotation);
+        enemyFiringInternal = 2;
+        }
 
     }
 

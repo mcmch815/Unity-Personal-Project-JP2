@@ -23,8 +23,6 @@ private float spawnRangeZ = 20;
         spawnCollectable();
         SpawnEnemyWave();
 
-
-
     }
 
 
@@ -36,9 +34,8 @@ private float spawnRangeZ = 20;
         if(GameObject.FindGameObjectsWithTag("Collectable").Length == 0){
            spawnCollectable();
            SpawnEnemyWave();
-        
-        }
-
+                }
+       
     }
 
     //generate random spwan position within a range
