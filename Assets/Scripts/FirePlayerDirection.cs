@@ -17,9 +17,14 @@ public class FirePlayerDirection : MonoBehaviour
        if( GameObject.Find("Player") != null){
       
              player = GameObject.Find("Player");
+         
+            
+           transform.LookAt(player.transform.position);
+           transform.Rotate(90, 0, 0, Space.Self);
+           // transform.rotation = Quaternion.LookRotation(player.transform.position);
+           
+            
 
-            transform.LookAt(player.transform.position);
-            transform.Rotate(90, 0, 0, Space.Self);
        
          }
     }
@@ -28,10 +33,18 @@ public class FirePlayerDirection : MonoBehaviour
     void Update()
     {
       if( GameObject.Find("Player") != null){  
-      // projectileRb.AddForce(lookDirection * speed * Time.deltaTime);
+    
       transform.Translate(Vector3.up * Time.deltaTime * speed);
+      
+
       }
 
+      //make projectile stay above grounf
+      //if(transform.position.y < 0.5f){
+         //transform.position.y = 0.5f;
+     // }
+
+         //destroy projectile if it goes out of bounds
         if(transform.position.x > 25 || transform.position.x < -25 || transform.position.z > 25 || transform.position.z < -25 )
          {
             Destroy(gameObject);

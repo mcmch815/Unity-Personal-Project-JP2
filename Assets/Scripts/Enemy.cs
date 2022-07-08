@@ -14,34 +14,20 @@ public class Enemy : MonoBehaviour
    
     private PlayerController playerControllerScript;
 
+    public float rotateSpeed;
 
-
-   
-    
-
-    
-
-   
-  
 
     // Start is called before the first frame update
     void Start()
     {
         enemyRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
-       
-        
-       //enemyAnim.SetBool("Walk Forward", true);
       
        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
-       //InvokeRepeating("FireProjectile", startDelay, enemyFiringInternal);
-      
+     
     }
 
    
- 
-
-
         void Update()
     {
         
@@ -53,7 +39,7 @@ public class Enemy : MonoBehaviour
              Vector3 direction = (player.transform.position - transform.position);
             var step = speed * Time.deltaTime;
             //make enemy look at player
-            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, direction, step, 0.0f));
+            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, direction, rotateSpeed, 0.0f));
             //move enemy towards player
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
              

@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 
 //speed variable 
 
-    private float speed = 5.0f;
+    private float speed = 10.0f;
     private Rigidbody playerRb;
     
     public bool gameOver = false;
@@ -38,19 +38,18 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
         }
 
-          if( GameObject.FindGameObjectsWithTag("Collectable") != null)
+              //make the player look at the collectable
+
+           if( GameObject.FindGameObjectsWithTag("Collectable") != null)
         {
 
             collectable = GameObject.FindGameObjectWithTag("Collectable");
             Debug.Log("Collectable found");
              Vector3 direction = (collectable.transform.position - transform.position);
-            var step = 100* Time.deltaTime;
+            var step = 5* Time.deltaTime;
             //make player look at collectable
             transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, direction, step, 0.0f));
-           
-             
-             
-
+          
         }
     }
 
@@ -60,10 +59,10 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        playerRb.AddForce(Vector3.forward * speed * verticalInput);
-        playerRb.AddForce(Vector3.right * speed * horizontalInput);
+       // playerRb.AddForce(Vector3.forward * speed * verticalInput);
+       // playerRb.AddForce(Vector3.right * speed * horizontalInput);
 
-       
+        transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, verticalInput * speed * Time.deltaTime);
 
     }
 

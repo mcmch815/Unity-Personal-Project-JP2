@@ -113,7 +113,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 32
   m_CollisionDetection: 0
 --- !u!95 &-7093873328910267458
 Animator:
@@ -150,6 +150,7 @@ MonoBehaviour:
   enemyProjectilePrefab: {fileID: 1475560715300570221, guid: 2bd9fa38577b3284aa17f3560d14b4bc, type: 3}
   enemyFiringInternal: 1
   startDelay: 2
+  rotateSpeed: 40
 --- !u!1001 &5653268204458900623
 PrefabInstance:
   m_ObjectHideFlags: 0
