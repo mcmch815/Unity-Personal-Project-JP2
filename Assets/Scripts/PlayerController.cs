@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour
 
     private GameObject collectable;
 
+    public ParticleSystem deathExplosionPrefab;
+
 
     // Start is called before the first frame update
     void Start()
     {
      playerRb = GetComponent<Rigidbody>();   
-    
+     
         
     }
 
@@ -43,6 +45,8 @@ public class PlayerController : MonoBehaviour
            if( GameObject.FindGameObjectsWithTag("Collectable") != null)
         {
 
+           
+
             collectable = GameObject.FindGameObjectWithTag("Collectable");
             Debug.Log("Collectable found");
              Vector3 direction = (collectable.transform.position - transform.position);
@@ -52,6 +56,10 @@ public class PlayerController : MonoBehaviour
           
         }
     }
+
+
+   
+ 
 
     //Move player method
     void MovePlayer(){
@@ -85,8 +93,10 @@ public class PlayerController : MonoBehaviour
         //if enemy projectile collides with player, kill player
         if(other.CompareTag("Enemy Projectile")){
             
-            gameOver = true;
+           Instantiate(deathExplosionPrefab, transform.position, deathExplosionPrefab.transform.rotation);
+           
             Destroy(gameObject);
+            gameOver = true;
             Debug.Log("Game Over!");
 
         }

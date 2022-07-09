@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: 0
+  deathExplosionPrefab: {fileID: 19821056, guid: 079954accd64b32419ec069129c81273, type: 3}
 --- !u!65 &9082492455180343629
 BoxCollider:
   m_ObjectHideFlags: 0
