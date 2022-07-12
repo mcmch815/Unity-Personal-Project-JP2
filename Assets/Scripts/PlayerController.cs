@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 
 //speed variable 
 
-    private float speed = 10.0f;
+    [SerializeField] private float speed = 10.0f;
     private Rigidbody playerRb;
     
     public bool gameOver = false;
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (gameOver == false)
         {
@@ -67,10 +67,10 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-       // playerRb.AddForce(Vector3.forward * speed * verticalInput);
-       // playerRb.AddForce(Vector3.right * speed * horizontalInput);
+        //playerRb.AddRelativeForce(Vector3.forward * speed * verticalInput);
+       // playerRb.AddRelativeForce(Vector3.right * speed * horizontalInput);
 
-        transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, verticalInput * speed * Time.deltaTime);
+       transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, verticalInput * speed * Time.deltaTime);
 
     }
 
